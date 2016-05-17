@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9FD738D41CE21BE9006BF59D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD738D31CE21BE9006BF59D /* main.swift */; };
+		9FD738DB1CE22147006BF59D /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD738DA1CE22147006BF59D /* Vector.swift */; };
+		9FD738DD1CE22AD0006BF59D /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD738DC1CE22AD0006BF59D /* Matrix.swift */; };
+		9FD738DF1CE22AE7006BF59D /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD738DE1CE22AE7006BF59D /* Numeric.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,9 @@
 /* Begin PBXFileReference section */
 		9FD738D01CE21BE9006BF59D /* Swector */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Swector; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FD738D31CE21BE9006BF59D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		9FD738DA1CE22147006BF59D /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		9FD738DC1CE22AD0006BF59D /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		9FD738DE1CE22AE7006BF59D /* Numeric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				9FD738D31CE21BE9006BF59D /* main.swift */,
+				9FD738DE1CE22AE7006BF59D /* Numeric.swift */,
+				9FD738DA1CE22147006BF59D /* Vector.swift */,
+				9FD738DC1CE22AD0006BF59D /* Matrix.swift */,
 			);
 			path = Swector;
 			sourceTree = "<group>";
@@ -72,6 +81,7 @@
 				9FD738CC1CE21BE9006BF59D /* Sources */,
 				9FD738CD1CE21BE9006BF59D /* Frameworks */,
 				9FD738CE1CE21BE9006BF59D /* CopyFiles */,
+				86485E1EB0AE5D11AA47C333 /* Tailor */,
 			);
 			buildRules = (
 			);
@@ -114,12 +124,32 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		86485E1EB0AE5D11AA47C333 /* Tailor */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Tailor;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if hash tailor 2>/dev/null; then\n  tailor\nelse\n  echo \"warning: Please install Tailor from https://tailor.sh\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9FD738CC1CE21BE9006BF59D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD738DB1CE22147006BF59D /* Vector.swift in Sources */,
 				9FD738D41CE21BE9006BF59D /* main.swift in Sources */,
+				9FD738DD1CE22AD0006BF59D /* Matrix.swift in Sources */,
+				9FD738DF1CE22AE7006BF59D /* Numeric.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +271,7 @@
 				9FD738D91CE21BE9006BF59D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
