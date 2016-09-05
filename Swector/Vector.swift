@@ -50,19 +50,28 @@ extension Vector: CollectionType {
 private extension Vector {
 
     func add(v: Vector) -> Vector {
-        return Vector(zip(self.data, v.data).map { $0 + $1 })
+        return Vector(zip(self.data, v.data).map(+))
     }
 
     func subtract(v: Vector) -> Vector {
-        return Vector(zip(self.data, v.data).map { $0 - $1 })
+        return Vector(zip(self.data, v.data).map(-))
     }
 
     func dot(v: Vector) -> Element {
-        return zip(self.data, v.data).map({ $0 * $1 }).reduce(Element(0), combine: +)
+        return zip(self.data, v.data).map(*).reduce(Element(0), combine: +)
     }
 
     func cross(v: Vector) -> Vector {
-        return Vector() // TODO: implement me
+        assert(self.size == v.size)
+        var product = Vector()
+        for i in 0..<self.size {
+            let first = (i+1) % self.size
+            let second = (i+2) % self.size
+            let nextElement = self.data[first]*v.data[second]-v.data[first]*self.data[second]
+            let newData: [T] = product.data + [nextElement]
+            product = Vector(newData)
+        }
+        return product
     }
 
 }
@@ -80,4 +89,18 @@ func - <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
 // Times
 func * <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
     return lhs.cross(rhs)
+}
+
+// Dot
+infix operator ** { associativity left precedence 160 }
+
+func ** <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> T {
+    return lhs.dot(rhs)
+}
+
+// Debugging
+extension Vector: CustomStringConvertible {
+    var description: String {
+        return self.data.description
+    }
 }

@@ -8,4 +8,12 @@
 
 import Foundation
 
-print("Hello, World!")
+// Really testing
+let u = Vector([1, 2, 3])
+let v = Vector([4, 5, 6])
+print(u)
+print(v)
+print(u + v)
+print(u - v)
+print(u ** v)
+print(u * v)
