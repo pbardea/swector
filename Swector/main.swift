@@ -17,3 +17,7 @@ print(u + v)
 print(u - v)
 print(u ** v)
 print(u * v)
+
+let A = Matrix([Vector([1,2,3]), Vector([4,5,6]), Vector([7,8,9])])
+
+print(A * A)

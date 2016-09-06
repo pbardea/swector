@@ -24,6 +24,10 @@ struct Matrix<T: Numeric> {
     init(_ data: [Vector<Element>] = []) {
         self.data = data
     }
+
+    init(_ data: [[Element]] = []) {
+        self.data = data.map { d in Vector(d) }
+    }
 }
 
 extension Matrix: SequenceType {
@@ -39,6 +43,20 @@ extension Matrix: SequenceType {
             }
             return nil
         }
+    }
+
+}
+
+extension Matrix {
+
+    func getRow(row: Int) -> Vector<Element> {
+        return self.data[row]
+    }
+
+    func getColumn(column: Int) -> Vector<Element> {
+        return Vector(self.data.map { v in
+            v[column]
+        })
     }
 
 }
@@ -69,7 +87,12 @@ extension Matrix: Indexable, CollectionType {
 private extension Matrix {
 
     func mult(m: Matrix) -> Matrix {
-        return Matrix()
+        assert(self.data.count > 0)
+        return Matrix((0..<self.data.count).map { i in
+            (0..<m.data[0].size).map { j in
+                self.getRow(i) ** m.getColumn(j)
+            }
+        })
     }
 
     func add(m: Matrix) -> Matrix {
