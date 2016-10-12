@@ -116,6 +116,20 @@ private extension Matrix {
     func isSameSizeAs(_ m: Matrix) -> Bool {
         return self.size == m.size
     }
+}
+
+extension Matrix: Equatable {
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func ==(lhs: Matrix<T>, rhs: Matrix<T>) -> Bool {
+        return lhs.data == rhs.data
+    }
 
 }
 

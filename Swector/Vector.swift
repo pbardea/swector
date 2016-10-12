@@ -87,6 +87,21 @@ private extension Vector {
 
 }
 
+extension Vector: Equatable {
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func ==(lhs: Vector<T>, rhs: Vector<T>) -> Bool {
+        return lhs.data == rhs.data
+    }
+    
+}
+
 // Add
 func + <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
     return lhs.add(rhs)
@@ -103,7 +118,12 @@ func * <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
 }
 
 // Dot
-infix operator ** { associativity left precedence 160 }
+precedencegroup DotPrecedence {
+    associativity: left
+    higherThan: ComparisonPrecedence
+}
+
+infix operator ** : DotPrecedence
 
 func ** <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> T {
     return lhs.dot(rhs)

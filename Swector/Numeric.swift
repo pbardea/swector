@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol Numeric {
-    func + (lhs: Self, rhs: Self) -> Self
-    func - (lhs: Self, rhs: Self) -> Self
-    func * (lhs: Self, rhs: Self) -> Self
-    func / (lhs: Self, rhs: Self) -> Self
-    func % (lhs: Self, rhs: Self) -> Self
+protocol Numeric: Equatable {
+    static func + (lhs: Self, rhs: Self) -> Self
+    static func - (lhs: Self, rhs: Self) -> Self
+    static func * (lhs: Self, rhs: Self) -> Self
+    static func / (lhs: Self, rhs: Self) -> Self
+    static func % (lhs: Self, rhs: Self) -> Self
     init(_ v: Int)
     init(_ v: Double)
     init(_ v: Float)
