@@ -11,7 +11,7 @@ import Foundation
 struct Matrix<T: Numeric> {
     typealias Element = T
 
-    private var data: [Vector<Element>]
+    fileprivate var data: [Vector<Element>]
     var size: (Int, Int) {
         return (self.data.count, self.data.first?.size ?? 0)
     }
@@ -30,12 +30,12 @@ struct Matrix<T: Numeric> {
     }
 }
 
-extension Matrix: SequenceType {
-    typealias Generator = AnyGenerator<Vector<T>>
+extension Matrix: Sequence {
+    typealias Iterator = AnyIterator<Vector<T>>
 
-    func generate() -> Generator {
+    func makeIterator() -> Iterator {
         var index = 0
-        return AnyGenerator {
+        return AnyIterator {
             if index < self.data.count {
                 let d = self.data[index]
                 index += 1
@@ -49,11 +49,11 @@ extension Matrix: SequenceType {
 
 extension Matrix {
 
-    func getRow(row: Int) -> Vector<Element> {
+    func getRow(_ row: Int) -> Vector<Element> {
         return self.data[row]
     }
 
-    func getColumn(column: Int) -> Vector<Element> {
+    func getColumn(_ column: Int) -> Vector<Element> {
         return Vector(self.data.map { v in
             v[column]
         })
@@ -61,7 +61,17 @@ extension Matrix {
 
 }
 
-extension Matrix: Indexable, CollectionType {
+extension Matrix: Collection {
+    /// Returns the position immediately after the given index.
+    ///
+    /// - Parameter i: A valid index of the collection. `i` must be less than
+    ///   `endIndex`.
+    /// - Returns: The index value immediately after `i`.
+    public func index(after i: Int) -> Int {
+        guard i != endIndex else { fatalError("Cannot increment endIndex") }
+        return i + 1
+    }
+
     typealias Index = Int
     typealias _Element = Vector<T>
 
@@ -86,7 +96,7 @@ extension Matrix: Indexable, CollectionType {
 
 private extension Matrix {
 
-    func mult(m: Matrix) -> Matrix {
+    func mult(_ m: Matrix) -> Matrix {
         assert(self.data.count > 0)
         return Matrix((0..<self.data.count).map { i in
             (0..<m.data[0].size).map { j in
@@ -95,15 +105,15 @@ private extension Matrix {
         })
     }
 
-    func add(m: Matrix) -> Matrix {
+    func add(_ m: Matrix) -> Matrix {
         return Matrix(zip(self.data, m.data).map { $0 + $1 })
     }
 
-    func subtract(m: Matrix) -> Matrix {
+    func subtract(_ m: Matrix) -> Matrix {
         return Matrix(zip(self.data, m.data).map { $0 - $1 })
     }
 
-    func isSameSizeAs(m: Matrix) -> Bool {
+    func isSameSizeAs(_ m: Matrix) -> Bool {
         return self.size == m.size
     }
 
